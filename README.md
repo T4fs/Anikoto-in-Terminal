@@ -2,6 +2,18 @@
 
 **watch anime in your terminal**
 
+<p align="center">
+  <img src="assets/logo.svg" alt="An!KOTO logo" width="520">
+</p>
+
+the logo, straight from the terminal (white and blue, exactly as rendered in the app):
+
+An!KOTO is a fast terminal user interface for browsing and streaming anime,
+built in Go with [bubbletea](https://github.com/charmbracelet/bubbletea) and
+[lipgloss](https://github.com/charmbracelet/lipgloss). Search **anidb.app**
+right from your terminal, pick sub or dub, and play in mpv or vlc — no
+browser needed.
+
 ```
 █████╗  ███╗   ██╗   ██╗  ██╗ █████╗ ████████╗ █████╗
 ██╔══██╗ ██╔══╝ ██╔╝   ██║ ██╔╝ ██╔══██╗ ╚══██╔══╝ ██╔══██╗
@@ -10,12 +22,6 @@
 ██║  ██║ ██║    ██║    ██║  ██║ ██║  ██║    ██║    ██║  ██║
 ╚═╝  ╚═╝ ╚═╝    ╚═╝    ╚═╝  ╚═╝ ╚█████╔╝    ╚═╝    ╚█████╔╝
 ```
-
-An!KOTO is a fast terminal user interface for browsing and streaming anime,
-built in Go with [bubbletea](https://github.com/charmbracelet/bubbletea) and
-[lipgloss](https://github.com/charmbracelet/lipgloss). Search **anidb.app**
-right from your terminal, pick sub or dub, and play in mpv or vlc — no
-browser needed.
 
 ## features
 
