@@ -27,6 +27,11 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { background: var(--bg); color: var(--text);
     font-family: "Segoe UI", system-ui, -apple-system, sans-serif; line-height: 1.6; }
+  .bg { position: fixed; inset: 0; z-index: -1; overflow: hidden;
+    background: url("assets/bg.webp") center/cover no-repeat; filter: blur(24px) brightness(.75);
+    transform: scale(1.15); }
+  .bg::after { content: ""; position: absolute; inset: 0;
+    background: rgba(10,10,15,.6); }
   a { color: var(--accent2); text-decoration: none; }
   a:hover { text-decoration: underline; }
 
@@ -97,6 +102,8 @@
 </style>
 </head>
 <body>
+
+<div class="bg"></div>
 
 <nav>
   <div class="nav-in">
