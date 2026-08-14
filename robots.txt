@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://t4fs.github.io/Anikoto-in-Terminal/sitemap.xml
