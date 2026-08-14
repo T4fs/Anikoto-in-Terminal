@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect x="16" y="16" width="480" height="480" rx="104" fill="#0c0c0c"/>
+  <rect x="18.5" y="18.5" width="475" height="475" rx="102" fill="none" stroke="#2a2a35" stroke-width="5"/>
+  <text x="256" y="334" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="150" font-weight="800" fill="#ffffff" letter-spacing="8">AN<tspan fill="#5f87ff">!</tspan>KOT<tspan fill="#5f87ff">O</tspan></text>
+</svg>

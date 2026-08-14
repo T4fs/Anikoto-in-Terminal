@@ -12,7 +12,8 @@
 <meta property="og:url" content="https://t4fs.github.io/Anikoto-in-Terminal/">
 <meta property="og:image" content="https://raw.githubusercontent.com/T4fs/Anikoto-in-Terminal/main/assets/screenshots/home.png">
 <link rel="canonical" href="https://t4fs.github.io/Anikoto-in-Terminal/">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📺</text></svg>">
+<link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 <style>
   :root {
     --bg: #0a0a0f;
@@ -87,7 +88,8 @@
 
   .feats { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
   .feat { border-radius: 16px; padding: 26px; }
-  .feat .ico { font-size: 1.7rem; margin-bottom: 12px; }
+  .feat .ico { font-size: 1.7rem; margin-bottom: 12px; color: var(--accent);
+    text-shadow: 0 0 24px rgba(110,156,255,.55); }
   .feat h3 { margin-bottom: 8px; }
   .feat p { color: var(--muted); font-size: .95rem; }
 
@@ -100,7 +102,7 @@
 
   .dl { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
   .dlc { border-radius: 16px; padding: 26px; text-align: center; }
-  .dlc .ico { font-size: 2.2rem; margin-bottom: 12px; }
+  .dlc .ico { font-size: 2.2rem; margin-bottom: 12px; color: var(--text); }
   .dlc h3 { margin-bottom: 4px; }
   .dlc p { color: var(--muted); font-size: .9rem; margin-bottom: 18px; }
   .dlc code { display: block; background: rgba(8,10,18,.55); border: 1px solid rgba(255,255,255,.1);
@@ -110,6 +112,7 @@
   footer { border-top: 1px solid rgba(255,255,255,.12); padding: 40px 24px; text-align: center;
     color: var(--muted); font-size: .9rem; }
   footer a { color: var(--muted); }
+  footer i { color: var(--accent); }
   footer .links { display: flex; gap: 20px; justify-content: center; margin-bottom: 14px; }
 </style>
 </head>
@@ -216,32 +219,32 @@
   <p class="sub">everything you need, nothing you don't</p>
   <div class="feats">
     <div class="feat glass">
-      <div class="ico">🔎</div>
+      <div class="ico"><i class="fa-solid fa-magnifying-glass"></i></div>
       <h3>Search &amp; Browse</h3>
       <p>search anidb.app and browse results from your terminal — no browser needed.</p>
     </div>
     <div class="feat glass">
-      <div class="ico">🎙️</div>
+      <div class="ico"><i class="fa-solid fa-microphone"></i></div>
       <h3>Sub / Dub</h3>
       <p>toggle between subbed and dubbed episodes with a single key.</p>
     </div>
     <div class="feat glass">
-      <div class="ico">📶</div>
+      <div class="ico"><i class="fa-solid fa-wifi"></i></div>
       <h3>Quality Sources</h3>
       <p>multiple sources (1080p / 720p / 360p) with automatic selection.</p>
     </div>
     <div class="feat glass">
-      <div class="ico">🖱️</div>
+      <div class="ico"><i class="fa-solid fa-computer-mouse"></i></div>
       <h3>Mouse Support</h3>
       <p>click the <strong>made by t4fs</strong> button to open the author's GitHub.</p>
     </div>
     <div class="feat glass">
-      <div class="ico">🎬</div>
+      <div class="ico"><i class="fa-solid fa-circle-play"></i></div>
       <h3>Your Player</h3>
       <p>plays in mpv, vlc, iina, or haruna — override with <code>ANITUI_PLAYER</code>.</p>
     </div>
     <div class="feat glass">
-      <div class="ico">⚡</div>
+      <div class="ico"><i class="fa-solid fa-bolt"></i></div>
       <h3>Fast &amp; Cross-Platform</h3>
       <p>built in Go with bubbletea. Windows, Linux, and macOS.</p>
     </div>
@@ -279,21 +282,21 @@
   <p class="sub">build from source — it takes seconds</p>
   <div class="dl">
     <div class="dlc glass">
-      <div class="ico">🪟</div>
+      <div class="ico"><i class="fa-brands fa-windows"></i></div>
       <h3>Windows</h3>
       <p>64-bit, build with Go</p>
       <code>cd anikoto<br>go build -trimpath -o "$HOME\.anitui\anitui.exe" ./cmd/anitui</code>
       <a class="btn" href="https://github.com/T4fs/Anikoto-in-Terminal">Source on GitHub</a>
     </div>
     <div class="dlc glass">
-      <div class="ico">🐧</div>
+      <div class="ico"><i class="fa-brands fa-linux"></i></div>
       <h3>Linux</h3>
       <p>build with make</p>
       <code>cd anikoto<br>make build<br>./build/anitui</code>
       <a class="btn" href="https://github.com/T4fs/Anikoto-in-Terminal">Source on GitHub</a>
     </div>
     <div class="dlc glass">
-      <div class="ico">🍎</div>
+      <div class="ico"><i class="fa-brands fa-apple"></i></div>
       <h3>macOS</h3>
       <p>Intel &amp; Apple Silicon</p>
       <code>cd anikoto<br>make build<br>./build/anitui</code>
@@ -309,7 +312,7 @@
     <a href="https://github.com/T4fs">made by t4fs</a>
     <a href="https://github.com/typechecks/anitui">a fork of anitui</a>
   </div>
-  <p>© 2026 An!KOTO — GPL-3.0. Made with 💙 in a terminal.</p>
+  <p>© 2026 An!KOTO — GPL-3.0. Made with <i class="fa-solid fa-heart"></i> in a terminal.</p>
 </footer>
 
 </body>

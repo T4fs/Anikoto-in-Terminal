@@ -6,7 +6,8 @@
 <title>An!KOTO Wiki — updates, documentation &amp; bug fixes</title>
 <meta name="description" content="An!KOTO wiki: update log, full documentation, bug fixes, and build instructions for the anime terminal client. Every update is documented here.">
 <link rel="canonical" href="https://t4fs.github.io/Anikoto-in-Terminal/wiki.html">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+<link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 <style>
   :root {
     --bg: #0a0a0f; --text: #f2f3f8; --muted: #b6bccb;
@@ -60,6 +61,7 @@
     color: var(--muted); margin-bottom: 10px; }
   .toc ul { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 22px; }
   .toc a { font-size: .95rem; }
+  .toc a i, h2.sec i { color: var(--accent); margin-right: 7px; }
 
   h2.sec { font-size: 1.5rem; margin: 54px 0 6px; padding-top: 20px;
     border-top: 1px solid rgba(255,255,255,.12); scroll-margin-top: 80px; }
@@ -120,14 +122,14 @@
   <div class="toc glass">
     <h2>Contents</h2>
     <ul>
-      <li><a href="#updates">📅 Update Log</a></li>
-      <li><a href="#documentation">📖 Documentation</a></li>
-      <li><a href="#bugfixes">🩹 Bug Fixes &amp; Troubleshooting</a></li>
-      <li><a href="#build">🛠️ Build &amp; Install</a></li>
+      <li><a href="#updates"><i class="fa-solid fa-calendar-days"></i> Update Log</a></li>
+      <li><a href="#documentation"><i class="fa-solid fa-book"></i> Documentation</a></li>
+      <li><a href="#bugfixes"><i class="fa-solid fa-bandaid"></i> Bug Fixes &amp; Troubleshooting</a></li>
+      <li><a href="#build"><i class="fa-solid fa-hammer"></i> Build &amp; Install</a></li>
     </ul>
   </div>
 
-  <h2 class="sec" id="updates">📅 Update Log</h2>
+  <h2 class="sec" id="updates"><i class="fa-solid fa-calendar-days"></i> Update Log</h2>
   <p class="secsub">Newest first. Every release gets an entry here.</p>
 
   <div class="entry glass">
@@ -136,6 +138,7 @@
     <ul>
       <li>Landing page and wiki switched to a <strong>liquid glass</strong> theme: frosted translucent panels (<code>backdrop-filter</code> blur), soft white borders, inner highlights, pill buttons, and floating shadows over the blurred background.</li>
       <li>Wiki now uses the same blurred anime background (<code>assets/bg.webp</code>) with glass cards, tables, and code blocks instead of the plain black page.</li>
+      <li>All emojis (favicons, feature and platform icons, wiki section icons, footer) replaced with the real <strong>An!KOTO logo</strong> (<code>assets/logo.svg</code>) as favicon plus a matching Font Awesome icon set in the logo's blue/white colors.</li>
     </ul>
   </div>
 
@@ -163,7 +166,7 @@
     </ul>
   </div>
 
-  <h2 class="sec" id="documentation">📖 Documentation</h2>
+  <h2 class="sec" id="documentation"><i class="fa-solid fa-book"></i> Documentation</h2>
   <p class="secsub">How An!KOTO works, inside and out.</p>
 
   <div class="doc">
@@ -226,7 +229,7 @@
     <p><code>1.0.0-anikoto</code> — auto-update is disabled.</p>
   </div>
 
-  <h2 class="sec" id="bugfixes">🩹 Bug Fixes &amp; Troubleshooting</h2>
+  <h2 class="sec" id="bugfixes"><i class="fa-solid fa-bandaid"></i> Bug Fixes &amp; Troubleshooting</h2>
   <p class="secsub">Fixed issues (with the fix that landed) and how to diagnose problems yourself.</p>
 
   <div class="fix glass">
@@ -282,7 +285,7 @@
     </ul>
   </div>
 
-  <h2 class="sec" id="build">🛠️ Build &amp; Install</h2>
+  <h2 class="sec" id="build"><i class="fa-solid fa-hammer"></i> Build &amp; Install</h2>
   <p class="secsub">From source — requires Go 1.21+.</p>
 
   <div class="doc">
