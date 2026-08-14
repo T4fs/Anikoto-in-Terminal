@@ -113,6 +113,62 @@
   </div>
 </nav>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.addEventListener("DOMContentLoaded", () => {
+  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (prefersReduced) {
+    gsap.set(".hero > *, section", { clearProps: "all" });
+  } else {
+    gsap.utils.toArray(".hero > *").forEach((el, i) => {
+      gsap.from(el, { y: 28, opacity: 0, duration: 0.7, delay: i * 0.12, ease: "power2.out" });
+    });
+
+    gsap.utils.toArray("section").forEach((sec) => {
+      gsap.from(sec.children[0], {
+        scrollTrigger: { trigger: sec, start: "top 78%" },
+        y: 24, opacity: 0, duration: 0.6, ease: "power2.out"
+      });
+      gsap.from(sec.children[1], {
+        scrollTrigger: { trigger: sec, start: "top 70%" },
+        y: 20, opacity: 0, duration: 0.6, ease: "power2.out"
+      });
+    });
+
+    gsap.utils.toArray(".shots figure").forEach((fig, i) => {
+      gsap.from(fig, {
+        scrollTrigger: { trigger: ".shots", start: "top 80%" },
+        y: 40, opacity: 0, duration: 0.6, delay: (i % 3) * 0.1, ease: "power2.out"
+      });
+    });
+
+    gsap.utils.toArray(".feat").forEach((card, i) => {
+      gsap.from(card, {
+        scrollTrigger: { trigger: ".feats", start: "top 80%" },
+        y: 30, opacity: 0, scale: 0.97, duration: 0.5, delay: (i % 3) * 0.08, ease: "power2.out"
+      });
+    });
+
+    gsap.utils.toArray("details").forEach((d, i) => {
+      gsap.from(d, {
+        scrollTrigger: { trigger: "#faq", start: "top 75%" },
+        x: -30, opacity: 0, duration: 0.5, delay: i * 0.07, ease: "power2.out"
+      });
+    });
+
+    gsap.utils.toArray(".dlc").forEach((card, i) => {
+      gsap.from(card, {
+        scrollTrigger: { trigger: ".dl", start: "top 80%" },
+        y: 40, opacity: 0, duration: 0.55, delay: i * 0.12, ease: "power2.out"
+      });
+    });
+  }
+  });
+</script>
+
 <header class="hero">
   <span class="pill">NEW An!KOTO 1.0 is Here</span>
   <h1>An!KOTO</h1>
