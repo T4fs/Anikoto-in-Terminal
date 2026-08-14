@@ -16,28 +16,39 @@
 <style>
   :root {
     --bg: #0a0a0f;
-    --bg2: #111118;
-    --card: #16161f;
-    --border: #262633;
-    --text: #e8e8f0;
-    --muted: #9aa0ae;
-    --accent: #5f87ff;
-    --accent2: #8ab0ff;
+    --text: #f2f3f8;
+    --muted: #b6bccb;
+    --accent: #6e9cff;
+    --accent2: #9dbdff;
+    --glass-border: rgba(255,255,255,.14);
+    --shadow: 0 18px 44px rgba(0,0,0,.4);
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { background: var(--bg); color: var(--text);
     font-family: "Segoe UI", system-ui, -apple-system, sans-serif; line-height: 1.6; }
   .bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;
-    background: url("assets/bg.webp") center/cover no-repeat; filter: blur(24px) brightness(.9);
-    transform: scale(1.15); pointer-events: none; }
+    background: url("assets/bg.webp") center/cover no-repeat;
+    filter: blur(28px) brightness(.85) saturate(1.25); transform: scale(1.2); pointer-events: none; }
   .bg::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(10,10,15,.55); }
+    background: linear-gradient(180deg, rgba(10,10,15,.4), rgba(10,10,15,.62)); }
   body > *:not(.bg) { position: relative; z-index: 1; }
   a { color: var(--accent2); text-decoration: none; }
   a:hover { text-decoration: underline; }
 
-  nav { position: sticky; top: 0; z-index: 50; background: rgba(10,10,15,.85);
-    backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); }
+  .glass {
+    background: linear-gradient(155deg, rgba(255,255,255,.13), rgba(255,255,255,.045) 45%, rgba(255,255,255,.02));
+    backdrop-filter: blur(22px) saturate(180%);
+    -webkit-backdrop-filter: blur(22px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.15), inset 0 -1px 0 rgba(0,0,0,.25), var(--shadow);
+  }
+
+  nav { position: sticky; top: 0; z-index: 50;
+    background: rgba(18,18,28,.42);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid rgba(255,255,255,.12);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.09); }
   .nav-in { max-width: 1080px; margin: 0 auto; padding: 14px 24px;
     display: flex; align-items: center; gap: 24px; }
   .brand { font-weight: 800; font-size: 1.15rem; color: var(--text); letter-spacing: .5px; }
@@ -45,19 +56,23 @@
   .nav-links { display: flex; gap: 18px; margin-left: auto; align-items: center; }
   .nav-links a { color: var(--muted); font-size: .95rem; }
   .nav-links a:hover { color: var(--text); text-decoration: none; }
-  .btn { display: inline-block; background: var(--accent); color: #0a0a0f; font-weight: 700;
-    padding: 10px 22px; border-radius: 8px; transition: background .15s; }
-  .btn:hover { background: var(--accent2); text-decoration: none; }
-  .btn.ghost { background: transparent; color: var(--text); border: 1px solid var(--border); }
-  .btn.ghost:hover { border-color: var(--accent); }
+  .btn { display: inline-block; background: linear-gradient(135deg, var(--accent), #3f6dff);
+    color: #fff; font-weight: 700; padding: 10px 22px; border-radius: 999px;
+    box-shadow: 0 8px 24px rgba(95,135,255,.35), inset 0 1px 0 rgba(255,255,255,.3);
+    transition: transform .15s, box-shadow .15s; }
+  .btn:hover { transform: translateY(-1px); text-decoration: none;
+    box-shadow: 0 12px 32px rgba(95,135,255,.45), inset 0 1px 0 rgba(255,255,255,.3); }
+  .btn.ghost { background: rgba(255,255,255,.08); color: var(--text);
+    border: 1px solid var(--glass-border); box-shadow: inset 0 1px 0 rgba(255,255,255,.12); }
+  .btn.ghost:hover { background: rgba(255,255,255,.15); border-color: var(--accent); }
 
   .hero { text-align: center; padding: 90px 24px 70px; }
-  .pill { display: inline-block; border: 1px solid var(--border); background: var(--card);
-    color: var(--accent2); font-size: .85rem; padding: 6px 16px; border-radius: 999px;
+  .pill { color: var(--accent2); font-size: .85rem; padding: 7px 18px; border-radius: 999px;
     margin-bottom: 26px; letter-spacing: .3px; }
   .hero h1 { font-size: clamp(3rem, 9vw, 5.5rem); letter-spacing: 2px;
     background: linear-gradient(180deg, #fff, var(--accent2));
-    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 6px 30px rgba(110,156,255,.35)); }
   .hero .tag { color: var(--muted); font-size: 1.25rem; margin: 14px 0 30px; }
   .hero .cta { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 
@@ -66,20 +81,17 @@
   section .sub { text-align: center; color: var(--muted); margin-bottom: 44px; }
 
   .shots { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-  .shots figure { background: var(--card); border: 1px solid var(--border); border-radius: 14px;
-    overflow: hidden; }
+  .shots figure { border-radius: 16px; overflow: hidden; }
   .shots img { width: 100%; display: block; }
   .shots figcaption { padding: 12px 16px; color: var(--muted); font-size: .9rem; }
 
   .feats { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-  .feat { background: var(--card); border: 1px solid var(--border); border-radius: 14px;
-    padding: 26px; }
+  .feat { border-radius: 16px; padding: 26px; }
   .feat .ico { font-size: 1.7rem; margin-bottom: 12px; }
   .feat h3 { margin-bottom: 8px; }
   .feat p { color: var(--muted); font-size: .95rem; }
 
-  details { background: var(--card); border: 1px solid var(--border); border-radius: 12px;
-    margin-bottom: 12px; padding: 18px 22px; }
+  details { border-radius: 14px; margin-bottom: 12px; padding: 18px 22px; }
   summary { cursor: pointer; font-weight: 600; list-style: none; display: flex;
     justify-content: space-between; align-items: center; }
   summary::after { content: "+"; color: var(--accent); font-size: 1.3rem; }
@@ -87,16 +99,15 @@
   details p { color: var(--muted); margin-top: 12px; font-size: .95rem; }
 
   .dl { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
-  .dlc { background: var(--card); border: 1px solid var(--border); border-radius: 14px;
-    padding: 26px; text-align: center; }
+  .dlc { border-radius: 16px; padding: 26px; text-align: center; }
   .dlc .ico { font-size: 2.2rem; margin-bottom: 12px; }
   .dlc h3 { margin-bottom: 4px; }
   .dlc p { color: var(--muted); font-size: .9rem; margin-bottom: 18px; }
-  .dlc code { display: block; background: #0d0d14; border: 1px solid var(--border);
+  .dlc code { display: block; background: rgba(8,10,18,.55); border: 1px solid rgba(255,255,255,.1);
     border-radius: 8px; padding: 10px 12px; font-size: .78rem; text-align: left;
-    overflow-x: auto; margin-bottom: 18px; word-break: break-all; }
+    overflow-x: auto; margin-bottom: 18px; word-break: break-all; backdrop-filter: blur(6px); }
 
-  footer { border-top: 1px solid var(--border); padding: 40px 24px; text-align: center;
+  footer { border-top: 1px solid rgba(255,255,255,.12); padding: 40px 24px; text-align: center;
     color: var(--muted); font-size: .9rem; }
   footer a { color: var(--muted); }
   footer .links { display: flex; gap: 20px; justify-content: center; margin-bottom: 14px; }
@@ -178,7 +189,7 @@
 </script>
 
 <header class="hero">
-  <span class="pill">NEW An!KOTO 1.0 is Here</span>
+  <span class="pill glass">NEW An!KOTO 1.0 is Here</span>
   <h1>An!KOTO</h1>
   <p class="tag">watch anime in your terminal</p>
   <div class="cta">
@@ -191,12 +202,12 @@
   <h2>Screenshots</h2>
   <p class="sub">your terminal, but with anime</p>
   <div class="shots">
-    <figure><img src="assets/screenshots/home.png" alt="An!KOTO home screen"><figcaption>home — search anidb.app right from your terminal</figcaption></figure>
-    <figure><img src="assets/screenshots/home-query.png" alt="An!KOTO home screen with query"><figcaption>type a query and hit enter</figcaption></figure>
-    <figure><img src="assets/screenshots/results.png" alt="An!KOTO search results"><figcaption>browse results without a browser</figcaption></figure>
-    <figure><img src="assets/screenshots/episodes.png" alt="An!KOTO episode list"><figcaption>pick an episode, sub or dub</figcaption></figure>
-    <figure><img src="assets/screenshots/details.png" alt="An!KOTO anime details"><figcaption>synopsis, genres, score — all in the TUI</figcaption></figure>
-    <figure><img src="assets/screenshots/watching.png" alt="An!KOTO watching"><figcaption>streaming in your player of choice</figcaption></figure>
+    <figure class="glass"><img src="assets/screenshots/home.png" alt="An!KOTO home screen"><figcaption>home — search anidb.app right from your terminal</figcaption></figure>
+    <figure class="glass"><img src="assets/screenshots/home-query.png" alt="An!KOTO home screen with query"><figcaption>type a query and hit enter</figcaption></figure>
+    <figure class="glass"><img src="assets/screenshots/results.png" alt="An!KOTO search results"><figcaption>browse results without a browser</figcaption></figure>
+    <figure class="glass"><img src="assets/screenshots/episodes.png" alt="An!KOTO episode list"><figcaption>pick an episode, sub or dub</figcaption></figure>
+    <figure class="glass"><img src="assets/screenshots/details.png" alt="An!KOTO anime details"><figcaption>synopsis, genres, score — all in the TUI</figcaption></figure>
+    <figure class="glass"><img src="assets/screenshots/watching.png" alt="An!KOTO watching"><figcaption>streaming in your player of choice</figcaption></figure>
   </div>
 </section>
 
@@ -204,32 +215,32 @@
   <h2>Features</h2>
   <p class="sub">everything you need, nothing you don't</p>
   <div class="feats">
-    <div class="feat">
+    <div class="feat glass">
       <div class="ico">🔎</div>
       <h3>Search &amp; Browse</h3>
       <p>search anidb.app and browse results from your terminal — no browser needed.</p>
     </div>
-    <div class="feat">
+    <div class="feat glass">
       <div class="ico">🎙️</div>
       <h3>Sub / Dub</h3>
       <p>toggle between subbed and dubbed episodes with a single key.</p>
     </div>
-    <div class="feat">
+    <div class="feat glass">
       <div class="ico">📶</div>
       <h3>Quality Sources</h3>
       <p>multiple sources (1080p / 720p / 360p) with automatic selection.</p>
     </div>
-    <div class="feat">
+    <div class="feat glass">
       <div class="ico">🖱️</div>
       <h3>Mouse Support</h3>
       <p>click the <strong>made by t4fs</strong> button to open the author's GitHub.</p>
     </div>
-    <div class="feat">
+    <div class="feat glass">
       <div class="ico">🎬</div>
       <h3>Your Player</h3>
       <p>plays in mpv, vlc, iina, or haruna — override with <code>ANITUI_PLAYER</code>.</p>
     </div>
-    <div class="feat">
+    <div class="feat glass">
       <div class="ico">⚡</div>
       <h3>Fast &amp; Cross-Platform</h3>
       <p>built in Go with bubbletea. Windows, Linux, and macOS.</p>
@@ -241,23 +252,23 @@
   <h2>Frequently Asked Questions</h2>
   <p class="sub">have a question not answered here? open an issue on GitHub</p>
 
-  <details open>
+  <details open class="glass">
     <summary>Is An!KOTO free?</summary>
     <p>Yes — An!KOTO is completely free and open source (GPL-3.0). No paywalls, no ads.</p>
   </details>
-  <details>
+  <details class="glass">
     <summary>Where does it stream from?</summary>
     <p>anidb.app. Search, episodes, and streams all come straight from anidb.app — no account needed.</p>
   </details>
-  <details>
+  <details class="glass">
     <summary>What operating systems are supported?</summary>
     <p>Windows, Linux, and macOS (amd64 &amp; arm64).</p>
   </details>
-  <details>
+  <details class="glass">
     <summary>What media players does it support?</summary>
     <p>mpv, vlc, iina (macOS), and haruna. An!KOTO auto-detects your player, or set the <code>ANITUI_PLAYER</code> environment variable.</p>
   </details>
-  <details>
+  <details class="glass">
     <summary>Is a mouse needed?</summary>
     <p>No — everything works with vim keys or arrow keys. The mouse is just a bonus (like the clickable credit button).</p>
   </details>
@@ -267,21 +278,21 @@
   <h2>Download</h2>
   <p class="sub">build from source — it takes seconds</p>
   <div class="dl">
-    <div class="dlc">
+    <div class="dlc glass">
       <div class="ico">🪟</div>
       <h3>Windows</h3>
       <p>64-bit, build with Go</p>
       <code>cd anikoto<br>go build -trimpath -o "$HOME\.anitui\anitui.exe" ./cmd/anitui</code>
       <a class="btn" href="https://github.com/T4fs/Anikoto-in-Terminal">Source on GitHub</a>
     </div>
-    <div class="dlc">
+    <div class="dlc glass">
       <div class="ico">🐧</div>
       <h3>Linux</h3>
       <p>build with make</p>
       <code>cd anikoto<br>make build<br>./build/anitui</code>
       <a class="btn" href="https://github.com/T4fs/Anikoto-in-Terminal">Source on GitHub</a>
     </div>
-    <div class="dlc">
+    <div class="dlc glass">
       <div class="ico">🍎</div>
       <h3>macOS</h3>
       <p>Intel &amp; Apple Silicon</p>

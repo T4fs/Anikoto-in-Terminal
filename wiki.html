@@ -9,18 +9,38 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
 <style>
   :root {
-    --bg: #0a0a0f; --bg2: #111118; --card: #16161f; --border: #262633;
-    --text: #e8e8f0; --muted: #9aa0ae; --accent: #5f87ff; --accent2: #8ab0ff;
+    --bg: #0a0a0f; --text: #f2f3f8; --muted: #b6bccb;
+    --accent: #6e9cff; --accent2: #9dbdff;
     --green: #7ee2a8; --yellow: #ffd479; --red: #ff7b7b;
+    --glass-border: rgba(255,255,255,.14);
+    --shadow: 0 18px 44px rgba(0,0,0,.4);
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { background: var(--bg); color: var(--text);
     font-family: "Segoe UI", system-ui, -apple-system, sans-serif; line-height: 1.65; }
+  .bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;
+    background: url("assets/bg.webp") center/cover no-repeat;
+    filter: blur(28px) brightness(.85) saturate(1.25); transform: scale(1.2); pointer-events: none; }
+  .bg::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(180deg, rgba(10,10,15,.4), rgba(10,10,15,.62)); }
+  body > *:not(.bg) { position: relative; z-index: 1; }
   a { color: var(--accent2); text-decoration: none; }
   a:hover { text-decoration: underline; }
 
-  nav { position: sticky; top: 0; z-index: 50; background: rgba(10,10,15,.85);
-    backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); }
+  .glass {
+    background: linear-gradient(155deg, rgba(255,255,255,.13), rgba(255,255,255,.045) 45%, rgba(255,255,255,.02));
+    backdrop-filter: blur(22px) saturate(180%);
+    -webkit-backdrop-filter: blur(22px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.15), inset 0 -1px 0 rgba(0,0,0,.25), var(--shadow);
+  }
+
+  nav { position: sticky; top: 0; z-index: 50;
+    background: rgba(18,18,28,.42);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid rgba(255,255,255,.12);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.09); }
   .nav-in { max-width: 860px; margin: 0 auto; padding: 14px 24px;
     display: flex; align-items: center; gap: 20px; }
   .brand { font-weight: 800; color: var(--text); }
@@ -35,51 +55,51 @@
   .lede { color: var(--muted); margin-bottom: 34px; }
   .lede b { color: var(--accent2); }
 
-  .toc { background: var(--card); border: 1px solid var(--border); border-radius: 12px;
-    padding: 18px 24px; margin-bottom: 44px; }
+  .toc { border-radius: 14px; padding: 18px 24px; margin-bottom: 44px; }
   .toc h2 { font-size: .95rem; text-transform: uppercase; letter-spacing: 1px;
     color: var(--muted); margin-bottom: 10px; }
   .toc ul { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 22px; }
   .toc a { font-size: .95rem; }
 
   h2.sec { font-size: 1.5rem; margin: 54px 0 6px; padding-top: 20px;
-    border-top: 1px solid var(--border); scroll-margin-top: 80px; }
+    border-top: 1px solid rgba(255,255,255,.12); scroll-margin-top: 80px; }
   .secsub { color: var(--muted); margin-bottom: 22px; }
 
-  .entry { background: var(--card); border: 1px solid var(--border); border-radius: 12px;
-    padding: 20px 24px; margin-bottom: 14px; }
+  .entry { border-radius: 14px; padding: 20px 24px; margin-bottom: 14px; }
   .entry .date { color: var(--accent2); font-size: .85rem; letter-spacing: .4px; }
   .entry h3 { margin: 4px 0 10px; font-size: 1.1rem; }
   .entry ul { padding-left: 20px; color: var(--muted); }
   .entry ul li { margin: 4px 0; }
-  .entry code, .doc code, .fix code { background: #0d0d14; border: 1px solid var(--border);
-    border-radius: 6px; padding: 1px 7px; font-size: .88em; }
+  .entry code, .doc code, .fix code { background: rgba(8,10,18,.55); border: 1px solid rgba(255,255,255,.1);
+    border-radius: 6px; padding: 1px 7px; font-size: .88em; backdrop-filter: blur(6px); }
 
   .doc h3 { margin: 26px 0 8px; font-size: 1.15rem; }
   .doc p, .doc li { color: var(--muted); }
   .doc ul, .doc ol { padding-left: 22px; }
   table { border-collapse: collapse; width: 100%; margin: 10px 0 20px; }
-  td, th { border: 1px solid var(--border); padding: 7px 12px; text-align: left;
-    font-size: .93rem; }
+  td, th { border: 1px solid rgba(255,255,255,.14); padding: 7px 12px; text-align: left;
+    font-size: .93rem; background: rgba(255,255,255,.03); }
   th { color: var(--accent2); }
   td:first-child code { border: none; background: none; padding: 0; color: var(--text); }
-  pre { background: #0d0d14; border: 1px solid var(--border); border-radius: 10px;
-    padding: 14px 18px; overflow-x: auto; margin: 10px 0 20px; font-size: .88rem; }
+  pre { background: rgba(8,10,18,.55); border: 1px solid rgba(255,255,255,.1); border-radius: 10px;
+    padding: 14px 18px; overflow-x: auto; margin: 10px 0 20px; font-size: .88rem;
+    backdrop-filter: blur(6px); }
 
-  .fix { background: var(--card); border: 1px solid var(--border); border-radius: 12px;
-    padding: 18px 22px; margin-bottom: 14px; }
+  .fix { border-radius: 14px; padding: 18px 22px; margin-bottom: 14px; }
   .fix h3 { font-size: 1.05rem; margin-bottom: 8px; }
   .fix h3 .st { font-size: .8rem; padding: 2px 10px; border-radius: 999px; margin-right: 8px; }
-  .st.ok { background: rgba(126,226,168,.15); color: var(--green); }
-  .st.help { background: rgba(255,212,121,.15); color: var(--yellow); }
+  .st.ok { background: rgba(126,226,168,.18); color: var(--green); }
+  .st.help { background: rgba(255,212,121,.18); color: var(--yellow); }
   .fix p, .fix li { color: var(--muted); }
   .fix ul { padding-left: 20px; }
 
-  footer { border-top: 1px solid var(--border); padding: 30px 24px; text-align: center;
+  footer { border-top: 1px solid rgba(255,255,255,.12); padding: 30px 24px; text-align: center;
     color: var(--muted); font-size: .9rem; }
 </style>
 </head>
 <body>
+
+<div class="bg"></div>
 
 <nav>
   <div class="nav-in">
@@ -97,7 +117,7 @@
   <p class="lede">Updates, full documentation, and bug fixes — <b>every update from now on is documented here.</b>
   New to the project? Start with the <a href="#documentation">documentation</a>.</p>
 
-  <div class="toc">
+  <div class="toc glass">
     <h2>Contents</h2>
     <ul>
       <li><a href="#updates">📅 Update Log</a></li>
@@ -110,7 +130,16 @@
   <h2 class="sec" id="updates">📅 Update Log</h2>
   <p class="secsub">Newest first. Every release gets an entry here.</p>
 
-  <div class="entry">
+  <div class="entry glass">
+    <span class="date">2026-08-14</span>
+    <h3>Liquid glass theme + wiki background</h3>
+    <ul>
+      <li>Landing page and wiki switched to a <strong>liquid glass</strong> theme: frosted translucent panels (<code>backdrop-filter</code> blur), soft white borders, inner highlights, pill buttons, and floating shadows over the blurred background.</li>
+      <li>Wiki now uses the same blurred anime background (<code>assets/bg.webp</code>) with glass cards, tables, and code blocks instead of the plain black page.</li>
+    </ul>
+  </div>
+
+  <div class="entry glass">
     <span class="date">2026-08-14</span>
     <h3>Landing page — blurred anime background</h3>
     <ul>
@@ -119,7 +148,7 @@
     </ul>
   </div>
 
-  <div class="entry">
+  <div class="entry glass">
     <span class="date">2026-08-14</span>
     <h3>An!KOTO 1.0.0 — the rebrand launch</h3>
     <ul>
@@ -200,7 +229,7 @@
   <h2 class="sec" id="bugfixes">🩹 Bug Fixes &amp; Troubleshooting</h2>
   <p class="secsub">Fixed issues (with the fix that landed) and how to diagnose problems yourself.</p>
 
-  <div class="fix">
+  <div class="fix glass">
     <h3><span class="st ok">FIXED</span> "the UI is cursed" in Windows PowerShell</h3>
     <p>Everything stretched across the full window width with a huge empty canyon and the footer pinned to the bottom.</p>
     <ul>
@@ -210,7 +239,7 @@
     </ul>
   </div>
 
-  <div class="fix">
+  <div class="fix glass">
     <h3><span class="st ok">FIXED</span> logo box / borders misaligned</h3>
     <ul>
       <li><strong>Cause:</strong> byte-length math on strings containing box-drawing characters.</li>
@@ -218,7 +247,7 @@
     </ul>
   </div>
 
-  <div class="fix">
+  <div class="fix glass">
     <h3><span class="st ok">FIXED</span> searches returned nothing / Cloudflare wall</h3>
     <ul>
       <li><strong>Cause:</strong> the old source (anikototv.to) was dead and its CDN poisoned stream URLs.</li>
@@ -226,7 +255,7 @@
     </ul>
   </div>
 
-  <div class="fix">
+  <div class="fix glass">
     <h3><span class="st help">TROUBLESHOOT</span> clicking "made by t4fs" does nothing</h3>
     <ul>
       <li>The terminal must support mouse reporting (Windows Terminal, most modern terminals do).</li>
@@ -235,7 +264,7 @@
     </ul>
   </div>
 
-  <div class="fix">
+  <div class="fix glass">
     <h3><span class="st help">TROUBLESHOOT</span> player doesn't open when pressing enter</h3>
     <ul>
       <li>Install <strong>mpv</strong> (recommended), vlc, iina, or haruna.</li>
@@ -244,7 +273,7 @@
     </ul>
   </div>
 
-  <div class="fix">
+  <div class="fix glass">
     <h3><span class="st help">TROUBLESHOOT</span> how to report a bug properly</h3>
     <ul>
       <li>Run with debug logging: <code>ANIKOTO_DEBUG=1 anikoto</code>.</li>
