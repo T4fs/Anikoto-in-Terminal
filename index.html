@@ -3,82 +3,236 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Anikoto in Terminal — watch anime in your terminal</title>
-<meta name="description" content="Anikoto in your terminal — a fast open-source TUI to search, browse, and stream anime from anidb.app. Vim keys, sub/dub toggle, mpv playback, built in Go with bubbletea.">
-<meta name="keywords" content="anikoto, anikoto terminal, watch anime in terminal, anime terminal, anikoto github, anime tui, stream anime cli, anidb, go, bubbletea">
-<meta property="og:title" content="Anikoto in Terminal — watch anime in your terminal">
-<meta property="og:description" content="A fast TUI to search, browse, and stream anime from anidb.app — vim keys, sub/dub, mpv playback. Built in Go with bubbletea.">
+<title>An!KOTO — watch anime in your terminal</title>
+<meta name="description" content="An!KOTO is a fast open-source TUI to search, browse, and stream anime from anidb.app in your terminal. Vim keys, sub/dub toggle, mpv playback. Built in Go with bubbletea.">
+<meta name="keywords" content="anikoto, anikoto terminal, watch anime in terminal, anime terminal, anikoto github, anime tui, stream anime cli, anidb, go, bubbletea, mpv">
+<meta property="og:title" content="An!KOTO — watch anime in your terminal">
+<meta property="og:description" content="A fast TUI to search, browse, and stream anime from anidb.app — vim keys, sub/dub, mpv playback.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://t4fs.github.io/Anikoto-in-Terminal/">
+<meta property="og:image" content="https://raw.githubusercontent.com/T4fs/Anikoto-in-Terminal/main/assets/screenshots/shot-1.png">
 <link rel="canonical" href="https://t4fs.github.io/Anikoto-in-Terminal/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📺</text></svg>">
 <style>
-  body { margin: 0; padding: 0; background: #0c0c0c; color: #e6e6e6;
+  :root {
+    --bg: #0a0a0f;
+    --bg2: #111118;
+    --card: #16161f;
+    --border: #262633;
+    --text: #e8e8f0;
+    --muted: #9aa0ae;
+    --accent: #5f87ff;
+    --accent2: #8ab0ff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text);
     font-family: "Segoe UI", system-ui, -apple-system, sans-serif; line-height: 1.6; }
-  .wrap { max-width: 760px; margin: 0 auto; padding: 48px 20px 64px; }
-  h1 { font-size: 2.2rem; margin: 24px 0 4px; }
-  .tag { font-size: 1.15rem; color: #9aa0a6; margin-bottom: 28px; }
-  a { color: #5f87ff; }
-  code { background: #1c1c1c; border-radius: 6px; padding: 2px 7px; font-size: 0.9em; }
-  pre.cmd { background: #111; border: 1px solid #262626; border-radius: 10px;
-    padding: 14px 18px; overflow-x: auto; }
-  h2 { margin-top: 40px; font-size: 1.4rem; }
-  ul li { margin: 6px 0; }
-  table { border-collapse: collapse; width: 100%; }
-  td, th { border: 1px solid #262626; padding: 6px 12px; text-align: left; font-size: 0.95rem; }
-  .btn { display: inline-block; background: #5f87ff; color: #0c0c0c; font-weight: 600;
-    text-decoration: none; padding: 10px 22px; border-radius: 8px; margin-top: 12px; }
-  .foot { margin-top: 64px; color: #7a7e85; font-size: 0.9rem; }
+  a { color: var(--accent2); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  nav { position: sticky; top: 0; z-index: 50; background: rgba(10,10,15,.85);
+    backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); }
+  .nav-in { max-width: 1080px; margin: 0 auto; padding: 14px 24px;
+    display: flex; align-items: center; gap: 24px; }
+  .brand { font-weight: 800; font-size: 1.15rem; color: var(--text); letter-spacing: .5px; }
+  .brand b { color: var(--accent); }
+  .nav-links { display: flex; gap: 18px; margin-left: auto; align-items: center; }
+  .nav-links a { color: var(--muted); font-size: .95rem; }
+  .nav-links a:hover { color: var(--text); text-decoration: none; }
+  .btn { display: inline-block; background: var(--accent); color: #0a0a0f; font-weight: 700;
+    padding: 10px 22px; border-radius: 8px; transition: background .15s; }
+  .btn:hover { background: var(--accent2); text-decoration: none; }
+  .btn.ghost { background: transparent; color: var(--text); border: 1px solid var(--border); }
+  .btn.ghost:hover { border-color: var(--accent); }
+
+  .hero { text-align: center; padding: 90px 24px 70px; }
+  .pill { display: inline-block; border: 1px solid var(--border); background: var(--card);
+    color: var(--accent2); font-size: .85rem; padding: 6px 16px; border-radius: 999px;
+    margin-bottom: 26px; letter-spacing: .3px; }
+  .hero h1 { font-size: clamp(3rem, 9vw, 5.5rem); letter-spacing: 2px;
+    background: linear-gradient(180deg, #fff, var(--accent2));
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .hero .tag { color: var(--muted); font-size: 1.25rem; margin: 14px 0 30px; }
+  .hero .cta { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+  section { max-width: 1080px; margin: 0 auto; padding: 70px 24px; }
+  section h2 { font-size: 1.9rem; text-align: center; margin-bottom: 8px; }
+  section .sub { text-align: center; color: var(--muted); margin-bottom: 44px; }
+
+  .shots { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+  .shots figure { background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+    overflow: hidden; }
+  .shots img { width: 100%; display: block; aspect-ratio: 16/10; object-fit: cover; }
+  .shots figcaption { padding: 12px 16px; color: var(--muted); font-size: .9rem; }
+
+  .feats { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+  .feat { background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+    padding: 26px; }
+  .feat .ico { font-size: 1.7rem; margin-bottom: 12px; }
+  .feat h3 { margin-bottom: 8px; }
+  .feat p { color: var(--muted); font-size: .95rem; }
+
+  details { background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    margin-bottom: 12px; padding: 18px 22px; }
+  summary { cursor: pointer; font-weight: 600; list-style: none; display: flex;
+    justify-content: space-between; align-items: center; }
+  summary::after { content: "+"; color: var(--accent); font-size: 1.3rem; }
+  details[open] summary::after { content: "–"; }
+  details p { color: var(--muted); margin-top: 12px; font-size: .95rem; }
+
+  .dl { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+  .dlc { background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+    padding: 26px; text-align: center; }
+  .dlc .ico { font-size: 2.2rem; margin-bottom: 12px; }
+  .dlc h3 { margin-bottom: 4px; }
+  .dlc p { color: var(--muted); font-size: .9rem; margin-bottom: 18px; }
+  .dlc code { display: block; background: #0d0d14; border: 1px solid var(--border);
+    border-radius: 8px; padding: 10px 12px; font-size: .78rem; text-align: left;
+    overflow-x: auto; margin-bottom: 18px; word-break: break-all; }
+
+  footer { border-top: 1px solid var(--border); padding: 40px 24px; text-align: center;
+    color: var(--muted); font-size: .9rem; }
+  footer a { color: var(--muted); }
+  footer .links { display: flex; gap: 20px; justify-content: center; margin-bottom: 14px; }
 </style>
 </head>
 <body>
-<div class="wrap">
+
+<nav>
+  <div class="nav-in">
+    <a class="brand" href="#">An<b>!</b>KOTO</a>
+    <div class="nav-links">
+      <a href="#shots">Screenshots</a>
+      <a href="#features">Features</a>
+      <a href="#faq">FAQ</a>
+      <a href="#download">Download</a>
+      <a href="https://github.com/T4fs/Anikoto-in-Terminal">GitHub</a>
+      <a class="btn" href="#download">Download Now</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <span class="pill">NEW An!KOTO 1.0 is Here</span>
   <h1>An!KOTO</h1>
   <p class="tag">watch anime in your terminal</p>
+  <div class="cta">
+    <a class="btn" href="#download">Download Now</a>
+    <a class="btn ghost" href="https://github.com/T4fs/Anikoto-in-Terminal">View Source on GitHub</a>
+  </div>
+</header>
 
-  <p>Anikoto is a fast terminal user interface for browsing and streaming anime —
-  search <strong>anidb.app</strong> right from your terminal, pick sub or dub,
-  and play in mpv or vlc. No browser needed.</p>
+<section id="shots">
+  <h2>Screenshots</h2>
+  <p class="sub">your terminal, but with anime</p>
+  <div class="shots">
+    <figure><img src="assets/screenshots/shot-1.png" alt="An!KOTO home screen"><figcaption>home — search anidb.app right from your terminal</figcaption></figure>
+    <figure><img src="assets/screenshots/shot-2.png" alt="An!KOTO search results"><figcaption>browse results without a browser</figcaption></figure>
+    <figure><img src="assets/screenshots/shot-3.png" alt="An!KOTO episode list"><figcaption>pick an episode, sub or dub</figcaption></figure>
+    <figure><img src="assets/screenshots/shot-4.png" alt="An!KOTO details"><figcaption>synopsis, genres, score — all in the TUI</figcaption></figure>
+    <figure><img src="assets/screenshots/shot-5.png" alt="An!KOTO watching"><figcaption>streaming in your player of choice</figcaption></figure>
+  </div>
+</section>
 
-  <a class="btn" href="https://github.com/T4fs/Anikoto-in-Terminal">View the source on GitHub</a>
+<section id="features">
+  <h2>Features</h2>
+  <p class="sub">everything you need, nothing you don't</p>
+  <div class="feats">
+    <div class="feat">
+      <div class="ico">🔎</div>
+      <h3>Search &amp; Browse</h3>
+      <p>search anidb.app and browse results from your terminal — no browser needed.</p>
+    </div>
+    <div class="feat">
+      <div class="ico">🎙️</div>
+      <h3>Sub / Dub</h3>
+      <p>toggle between subbed and dubbed episodes with a single key.</p>
+    </div>
+    <div class="feat">
+      <div class="ico">📶</div>
+      <h3>Quality Sources</h3>
+      <p>multiple sources (1080p / 720p / 360p) with automatic selection.</p>
+    </div>
+    <div class="feat">
+      <div class="ico">🖱️</div>
+      <h3>Mouse Support</h3>
+      <p>click the <strong>made by t4fs</strong> button to open the author's GitHub.</p>
+    </div>
+    <div class="feat">
+      <div class="ico">🎬</div>
+      <h3>Your Player</h3>
+      <p>plays in mpv, vlc, iina, or haruna — override with <code>ANITUI_PLAYER</code>.</p>
+    </div>
+    <div class="feat">
+      <div class="ico">⚡</div>
+      <h3>Fast &amp; Cross-Platform</h3>
+      <p>built in Go with bubbletea. Windows, Linux, and macOS.</p>
+    </div>
+  </div>
+</section>
 
-  <h2>features</h2>
-  <ul>
-    <li>search anidb.app and browse results from your terminal</li>
-    <li>sub / dub toggle per episode</li>
-    <li>multiple quality sources (1080p / 720p / 360p) with automatic selection</li>
-    <li>mouse support — click the <strong>made by t4fs</strong> button to open the author's GitHub</li>
-    <li>plays in mpv, vlc, iina, or haruna</li>
-    <li>cross-platform: linux, macos, windows — written in Go with <a href="https://github.com/charmbracelet/bubbletea">bubbletea</a></li>
-  </ul>
+<section id="faq">
+  <h2>Frequently Asked Questions</h2>
+  <p class="sub">have a question not answered here? open an issue on GitHub</p>
 
-  <h2>quick start</h2>
-  <pre class="cmd">git clone https://github.com/T4fs/Anikoto-in-Terminal
-cd Anikoto-in-Terminal/anikoto
-make build
-./build/anitui</pre>
+  <details open>
+    <summary>Is An!KOTO free?</summary>
+    <p>Yes — An!KOTO is completely free and open source (GPL-3.0). No paywalls, no ads.</p>
+  </details>
+  <details>
+    <summary>Where does it stream from?</summary>
+    <p>anidb.app. Search, episodes, and streams all come straight from anidb.app — no account needed.</p>
+  </details>
+  <details>
+    <summary>What operating systems are supported?</summary>
+    <p>Windows, Linux, and macOS (amd64 &amp; arm64).</p>
+  </details>
+  <details>
+    <summary>What media players does it support?</summary>
+    <p>mpv, vlc, iina (macOS), and haruna. An!KOTO auto-detects your player, or set the <code>ANITUI_PLAYER</code> environment variable.</p>
+  </details>
+  <details>
+    <summary>Is a mouse needed?</summary>
+    <p>No — everything works with vim keys or arrow keys. The mouse is just a bonus (like the clickable credit button).</p>
+  </details>
+</section>
 
-  <h2>windows</h2>
-  <pre class="cmd">cd Anikoto-in-Terminal/anikoto
-go build -trimpath -o "$HOME\.anitui\anitui.exe" ./cmd/anitui
-"%USERPROFILE%\.anitui\anitui.exe"</pre>
+<section id="download">
+  <h2>Download</h2>
+  <p class="sub">build from source — it takes seconds</p>
+  <div class="dl">
+    <div class="dlc">
+      <div class="ico">🪟</div>
+      <h3>Windows</h3>
+      <p>64-bit, build with Go</p>
+      <code>cd anikoto<br>go build -trimpath -o "$HOME\.anitui\anitui.exe" ./cmd/anitui</code>
+      <a class="btn" href="https://github.com/T4fs/Anikoto-in-Terminal">Source on GitHub</a>
+    </div>
+    <div class="dlc">
+      <div class="ico">🐧</div>
+      <h3>Linux</h3>
+      <p>build with make</p>
+      <code>cd anikoto<br>make build<br>./build/anitui</code>
+      <a class="btn" href="https://github.com/T4fs/Anikoto-in-Terminal">Source on GitHub</a>
+    </div>
+    <div class="dlc">
+      <div class="ico">🍎</div>
+      <h3>macOS</h3>
+      <p>Intel &amp; Apple Silicon</p>
+      <code>cd anikoto<br>make build<br>./build/anitui</code>
+      <a class="btn" href="https://github.com/T4fs/Anikoto-in-Terminal">Source on GitHub</a>
+    </div>
+  </div>
+</section>
 
-  <h2>controls</h2>
-  <table>
-    <tr><th>key</th><th>action</th></tr>
-    <tr><td>enter</td><td>confirm / select</td></tr>
-    <tr><td>j / k</td><td>down / up</td></tr>
-    <tr><td>g g / G</td><td>top / bottom</td></tr>
-    <tr><td>/</td><td>search</td></tr>
-    <tr><td>?</td><td>toggle help popup</td></tr>
-    <tr><td>d</td><td>toggle sub / dub</td></tr>
-    <tr><td>h / l</td><td>previous / next episode</td></tr>
-    <tr><td>ctrl+c</td><td>exit</td></tr>
-  </table>
+<footer>
+  <div class="links">
+    <a href="https://github.com/T4fs/Anikoto-in-Terminal">GitHub</a>
+    <a href="https://github.com/T4fs">made by t4fs</a>
+    <a href="https://github.com/typechecks/anitui">a fork of anitui</a>
+  </div>
+  <p>© 2026 An!KOTO — GPL-3.0. Made with 💙 in a terminal.</p>
+</footer>
 
-  <p class="foot">Anikoto in your terminal — an open-source anime TUI.
-  Made by <a href="https://github.com/T4fs">t4fs</a>, a fork of
-  <a href="https://github.com/typechecks/anitui">anitui</a>.
-  Licensed GPL-3.0.</p>
-</div>
 </body>
 </html>
