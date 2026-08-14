@@ -13,6 +13,10 @@
 - 🎬 plays in mpv, vlc, iina, or haruna
 - 🖥️ cross-platform: linux, macos, windows
 
+## wiki
+
+full documentation, the update log, and bug fixes live in the [**An!KOTO wiki**](https://t4fs.github.io/Anikoto-in-Terminal/wiki.html) � every update is documented there.
+
 ## getting started
 
 the code lives in the [`anikoto/`](anikoto) directory.

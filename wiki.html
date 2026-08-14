@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>An!KOTO Wiki — updates, documentation &amp; bug fixes</title>
+<meta name="description" content="An!KOTO wiki: update log, full documentation, bug fixes, and build instructions for the anime terminal client. Every update is documented here.">
+<link rel="canonical" href="https://t4fs.github.io/Anikoto-in-Terminal/wiki.html">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+<style>
+  :root {
+    --bg: #0a0a0f; --bg2: #111118; --card: #16161f; --border: #262633;
+    --text: #e8e8f0; --muted: #9aa0ae; --accent: #5f87ff; --accent2: #8ab0ff;
+    --green: #7ee2a8; --yellow: #ffd479; --red: #ff7b7b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text);
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif; line-height: 1.65; }
+  a { color: var(--accent2); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  nav { position: sticky; top: 0; z-index: 50; background: rgba(10,10,15,.85);
+    backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); }
+  .nav-in { max-width: 860px; margin: 0 auto; padding: 14px 24px;
+    display: flex; align-items: center; gap: 20px; }
+  .brand { font-weight: 800; color: var(--text); }
+  .brand b { color: var(--accent); }
+  .nav-links { margin-left: auto; display: flex; gap: 16px; }
+  .nav-links a { color: var(--muted); font-size: .92rem; }
+  .nav-links a:hover { color: var(--text); text-decoration: none; }
+  .nav-links .on { color: var(--accent2); }
+
+  main { max-width: 860px; margin: 0 auto; padding: 40px 24px 80px; }
+  h1 { font-size: 2rem; margin-bottom: 6px; }
+  .lede { color: var(--muted); margin-bottom: 34px; }
+  .lede b { color: var(--accent2); }
+
+  .toc { background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    padding: 18px 24px; margin-bottom: 44px; }
+  .toc h2 { font-size: .95rem; text-transform: uppercase; letter-spacing: 1px;
+    color: var(--muted); margin-bottom: 10px; }
+  .toc ul { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 22px; }
+  .toc a { font-size: .95rem; }
+
+  h2.sec { font-size: 1.5rem; margin: 54px 0 6px; padding-top: 20px;
+    border-top: 1px solid var(--border); scroll-margin-top: 80px; }
+  .secsub { color: var(--muted); margin-bottom: 22px; }
+
+  .entry { background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    padding: 20px 24px; margin-bottom: 14px; }
+  .entry .date { color: var(--accent2); font-size: .85rem; letter-spacing: .4px; }
+  .entry h3 { margin: 4px 0 10px; font-size: 1.1rem; }
+  .entry ul { padding-left: 20px; color: var(--muted); }
+  .entry ul li { margin: 4px 0; }
+  .entry code, .doc code, .fix code { background: #0d0d14; border: 1px solid var(--border);
+    border-radius: 6px; padding: 1px 7px; font-size: .88em; }
+
+  .doc h3 { margin: 26px 0 8px; font-size: 1.15rem; }
+  .doc p, .doc li { color: var(--muted); }
+  .doc ul, .doc ol { padding-left: 22px; }
+  table { border-collapse: collapse; width: 100%; margin: 10px 0 20px; }
+  td, th { border: 1px solid var(--border); padding: 7px 12px; text-align: left;
+    font-size: .93rem; }
+  th { color: var(--accent2); }
+  td:first-child code { border: none; background: none; padding: 0; color: var(--text); }
+  pre { background: #0d0d14; border: 1px solid var(--border); border-radius: 10px;
+    padding: 14px 18px; overflow-x: auto; margin: 10px 0 20px; font-size: .88rem; }
+
+  .fix { background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    padding: 18px 22px; margin-bottom: 14px; }
+  .fix h3 { font-size: 1.05rem; margin-bottom: 8px; }
+  .fix h3 .st { font-size: .8rem; padding: 2px 10px; border-radius: 999px; margin-right: 8px; }
+  .st.ok { background: rgba(126,226,168,.15); color: var(--green); }
+  .st.help { background: rgba(255,212,121,.15); color: var(--yellow); }
+  .fix p, .fix li { color: var(--muted); }
+  .fix ul { padding-left: 20px; }
+
+  footer { border-top: 1px solid var(--border); padding: 30px 24px; text-align: center;
+    color: var(--muted); font-size: .9rem; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a class="brand" href="index.html">An<b>!</b>KOTO <span style="color:var(--muted);font-weight:400">wiki</span></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a class="on" href="wiki.html">Wiki</a>
+      <a href="https://github.com/T4fs/Anikoto-in-Terminal">GitHub</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <h1>An!KOTO Wiki</h1>
+  <p class="lede">Updates, full documentation, and bug fixes — <b>every update from now on is documented here.</b>
+  New to the project? Start with the <a href="#documentation">documentation</a>.</p>
+
+  <div class="toc">
+    <h2>Contents</h2>
+    <ul>
+      <li><a href="#updates">📅 Update Log</a></li>
+      <li><a href="#documentation">📖 Documentation</a></li>
+      <li><a href="#bugfixes">🩹 Bug Fixes &amp; Troubleshooting</a></li>
+      <li><a href="#build">🛠️ Build &amp; Install</a></li>
+    </ul>
+  </div>
+
+  <h2 class="sec" id="updates">📅 Update Log</h2>
+  <p class="secsub">Newest first. Every release gets an entry here.</p>
+
+  <div class="entry">
+    <span class="date">2026-08-14</span>
+    <h3>An!KOTO 1.0.0 — the rebrand launch</h3>
+    <ul>
+      <li>Full rebrand of anitui to <strong>An!KOTO</strong> (version <code>1.0.0-anikoto</code>).</li>
+      <li>New source: <strong>anidb.app</strong> (search, episodes, languages, HLS streams — no Cloudflare issues, no extra dependencies).</li>
+      <li>Fixed home layout on wide and short windows (content capped at 100 columns, padding capped at 6 rows).</li>
+      <li>Fixed logo box width (proper <code>lipgloss.Width</code> handling) and footer gap alignment.</li>
+      <li>Added the clickable <strong>made by t4fs</strong> button (blue, hover highlight, opens GitHub on click).</li>
+      <li>Launchable as <code>anikoto</code> from cmd, PowerShell, and Git Bash via PATH shims.</li>
+      <li>Mouse support enabled (<code>tea.WithMouseCellMotion</code>).</li>
+      <li>GitHub Pages landing site + SEO, and this wiki.</li>
+    </ul>
+  </div>
+
+  <h2 class="sec" id="documentation">📖 Documentation</h2>
+  <p class="secsub">How An!KOTO works, inside and out.</p>
+
+  <div class="doc">
+    <h3>What it is</h3>
+    <p>An!KOTO is a terminal user interface (TUI) for browsing and streaming anime. It is written in
+    Go, built on <a href="https://github.com/charmbracelet/bubbletea">bubbletea</a> (v1.3.10) with
+    <a href="https://github.com/charmbracelet/lipgloss">lipgloss</a> (v1.1.0) for styling.</p>
+
+    <h3>Screens</h3>
+    <table>
+      <tr><th>screen</th><th>what it does</th></tr>
+      <tr><td>Home</td><td>logo box, search input, and the clickable credit button</td></tr>
+      <tr><td>Results</td><td>search results from anidb.app, pageable (10 per page)</td></tr>
+      <tr><td>Episode list</td><td>episodes of the selected anime, sub/dub toggle, synopsis</td></tr>
+      <tr><td>Watching</td><td>launches the selected video source in your media player</td></tr>
+      <tr><td>Help</td><td>keybinding popup (<code>?</code>)</td></tr>
+    </table>
+
+    <h3>Keys</h3>
+    <table>
+      <tr><th>key</th><th>action</th></tr>
+      <tr><td>enter</td><td>confirm / select</td></tr>
+      <tr><td>esc</td><td>return</td></tr>
+      <tr><td>j / k, arrows</td><td>move down / up</td></tr>
+      <tr><td>g g / G</td><td>jump to top / bottom</td></tr>
+      <tr><td>ctrl+u / ctrl+d</td><td>page up / down</td></tr>
+      <tr><td>/</td><td>search</td></tr>
+      <tr><td>?</td><td>toggle help popup</td></tr>
+      <tr><td>d</td><td>toggle sub / dub</td></tr>
+      <tr><td>h / l</td><td>previous / next episode (watching)</td></tr>
+      <tr><td>s</td><td>cycle video source (watching)</td></tr>
+      <tr><td>ctrl+c</td><td>exit</td></tr>
+    </table>
+
+    <h3>How streaming works</h3>
+    <ol>
+      <li>Search: <code>GET anidb.app/browse?q=…</code> → anime list.</li>
+      <li>Episodes: <code>GET anidb.app/api/frontend/anime/{id}/episodes</code>.</li>
+      <li>Languages: <code>GET anidb.app/api/frontend/episode/{id}/languages</code> (sub/dub).</li>
+      <li>Stream: the embed page leaks a <code>master.m3u8</code> HLS URL on <code>hls.anidb.app</code>; qualities (1080p/720p/360p) are read from the manifest and passed to your player.</li>
+    </ol>
+    <p>The player is launched with the plain stream URL — no referer or user-agent tricks needed.</p>
+
+    <h3>Environment variables</h3>
+    <table>
+      <tr><th>var</th><th>effect</th></tr>
+      <tr><td><code>ANITUI_PLAYER</code></td><td>force a player (e.g. <code>mpv</code>, <code>vlc</code>, <code>iina</code>, <code>haruna</code>)</td></tr>
+      <tr><td><code>ANIKOTO_DEBUG</code></td><td>write <code>anikoto-tui-debug.log</code> to your temp folder (see bug fixes)</td></tr>
+    </table>
+
+    <h3>Project layout</h3>
+    <pre>anikoto/
+├── cmd/anitui        # entrypoint (wires the anidb.app scraper, enables mouse)
+├── internal/scraper  # anidb.go source + tests; anikoto.go/allanime.go are dead code
+├── internal/tui      # bubbletea UI: screens, home layout, credit button, mouse
+├── internal/player   # mpv / vlc / iina / haruna detection
+└── internal/update   # self-update (disabled in this build)</pre>
+
+    <h3>Current version</h3>
+    <p><code>1.0.0-anikoto</code> — auto-update is disabled.</p>
+  </div>
+
+  <h2 class="sec" id="bugfixes">🩹 Bug Fixes &amp; Troubleshooting</h2>
+  <p class="secsub">Fixed issues (with the fix that landed) and how to diagnose problems yourself.</p>
+
+  <div class="fix">
+    <h3><span class="st ok">FIXED</span> "the UI is cursed" in Windows PowerShell</h3>
+    <p>Everything stretched across the full window width with a huge empty canyon and the footer pinned to the bottom.</p>
+    <ul>
+      <li><strong>Cause:</strong> the home layout spread content across the full reported terminal width and used unbounded vertical padding.</li>
+      <li><strong>Fix:</strong> content is now capped at 100 columns and centered; vertical padding is capped at 6 rows (<code>homeLayout</code> in <code>internal/tui/view.go</code>).</li>
+      <li><strong>Verified:</strong> <code>TestHomeView_WideWindowStaysTight</code> and <code>TestHomeView_ShortWindowPaddingCapped</code>.</li>
+    </ul>
+  </div>
+
+  <div class="fix">
+    <h3><span class="st ok">FIXED</span> logo box / borders misaligned</h3>
+    <ul>
+      <li><strong>Cause:</strong> byte-length math on strings containing box-drawing characters.</li>
+      <li><strong>Fix:</strong> width is computed with <code>lipgloss.Width()</code> everywhere (<code>ascii.go</code>); footer gaps adjusted to match. Covered by <code>TestRenderLogo_BoxWidthSane</code>.</li>
+    </ul>
+  </div>
+
+  <div class="fix">
+    <h3><span class="st ok">FIXED</span> searches returned nothing / Cloudflare wall</h3>
+    <ul>
+      <li><strong>Cause:</strong> the old source (anikototv.to) was dead and its CDN poisoned stream URLs.</li>
+      <li><strong>Fix:</strong> the app now scrapes <strong>anidb.app</strong> with a plain Go HTTP client — verified working without Cloudflare workarounds. Pipeline covered by <code>TestAnidbPipeline</code>.</li>
+    </ul>
+  </div>
+
+  <div class="fix">
+    <h3><span class="st help">TROUBLESHOOT</span> clicking "made by t4fs" does nothing</h3>
+    <ul>
+      <li>The terminal must support mouse reporting (Windows Terminal, most modern terminals do).</li>
+      <li>Some SSH/legacy terminals don't forward clicks — fall back to opening the link manually.</li>
+      <li>Hover should fill the button blue; if it doesn't, mouse events aren't reaching the app.</li>
+    </ul>
+  </div>
+
+  <div class="fix">
+    <h3><span class="st help">TROUBLESHOOT</span> player doesn't open when pressing enter</h3>
+    <ul>
+      <li>Install <strong>mpv</strong> (recommended), vlc, iina, or haruna.</li>
+      <li>Force a specific player: <code>ANITUI_PLAYER=mpv anikoto</code> (or set it in your shell profile).</li>
+      <li>Make sure the player is on your <code>PATH</code>.</li>
+    </ul>
+  </div>
+
+  <div class="fix">
+    <h3><span class="st help">TROUBLESHOOT</span> how to report a bug properly</h3>
+    <ul>
+      <li>Run with debug logging: <code>ANIKOTO_DEBUG=1 anikoto</code>.</li>
+      <li>Reproduce the problem, exit, then attach <code>%TEMP%\anikoto-tui-debug.log</code> (Windows) or <code>/tmp/anikoto-tui-debug.log</code> (Linux/macOS) to a <a href="https://github.com/T4fs/Anikoto-in-Terminal/issues">GitHub issue</a>.</li>
+      <li>Include your terminal (Windows Terminal / cmd / PowerShell / kitty / …) and player version.</li>
+    </ul>
+  </div>
+
+  <h2 class="sec" id="build">🛠️ Build &amp; Install</h2>
+  <p class="secsub">From source — requires Go 1.21+.</p>
+
+  <div class="doc">
+    <h3>Windows</h3>
+    <pre>git clone https://github.com/T4fs/Anikoto-in-Terminal
+cd Anikoto-in-Terminal/anikoto
+go build -trimpath -o "$HOME\.anitui\anitui.exe" ./cmd/anitui</pre>
+    <p>Optional: make <code>anikoto</code> available in any terminal (cmd, PowerShell, Git Bash):</p>
+    <pre>New-Item -ItemType Directory -Force -Path "$HOME\scoop\shims" | Out-Null
+Set-Content "$HOME\scoop\shims\anikoto.cmd" '@"%USERPROFILE%\.anitui\anitui.exe" %*'</pre>
+
+    <h3>Linux / macOS</h3>
+    <pre>git clone https://github.com/T4fs/Anikoto-in-Terminal
+cd Anikoto-in-Terminal/anikoto
+make build
+./build/anitui</pre>
+
+    <h3>Tests</h3>
+    <pre>go test ./...   # full suite (scraper + tui)</pre>
+  </div>
+</main>
+
+<footer>
+  <p>An!KOTO wiki — every update documented. <a href="https://github.com/T4fs/Anikoto-in-Terminal">GitHub</a> · <a href="index.html">Home</a></p>
+</footer>
+
+</body>
+</html>
