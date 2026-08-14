@@ -122,7 +122,7 @@ anikoto/
 
 - made by [t4fs](https://github.com/T4fs) — the in-app **made by t4fs**
   button is clickable, try it
-- a rebranded fork of [anitui](https://github.com/typechecks/anitui)
+- a inspired fork of [anitui](https://github.com/typechecks/anitui)
   by [typechecks](https://github.com/typechecks), with a fresh source
   (**anidb.app**) and home-screen polish
 
